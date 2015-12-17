@@ -17,7 +17,6 @@
     <property name="format" value="\n\n\n"/>
     <property name="message" value="Double blank lines."/>
   </module>
-  <module name="NewlineAtEndOfFile"/>
   <module name="FileTabCharacter">
     <property name="eachLine" value="true"/>
   </module>

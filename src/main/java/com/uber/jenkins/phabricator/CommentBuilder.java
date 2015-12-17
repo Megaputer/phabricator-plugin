@@ -80,9 +80,9 @@ class CommentBuilder {
         float lineCoverageDelta = lineCoveragePercent - parentCoverage.getLineCoveragePercent();
         float conditionCoverageDelta = conditionCoveragePercent - parentCoverage.getConditionalCoveragePercent();
 
-        String lineCoverageDeltaDisplay = String.format("%.3f", lineCoverageDelta);
+        String lineCoverageDeltaDisplay = String.format("%+.3f", lineCoverageDelta);
         String lineCoverageDisplay = String.format("%.3f", lineCoveragePercent);
-        String conditionCoverageDeltaDisplay = String.format("%.3f", conditionCoverageDelta);
+        String conditionCoverageDeltaDisplay = String.format("%+.3f", conditionCoverageDelta);
         String conditionCoverageDisplay = String.format("%.3f", conditionCoveragePercent);
 
         if (lineCoverageDelta == 0 && conditionCoverageDelta == 0) {
