@@ -72,25 +72,30 @@ class CommentBuilder {
         }
 
         Float lineCoveragePercent = currentCoverage.getLineCoveragePercent();
+        Float conditionCoveragePercent = currentCoverage.getConditionalCoveragePercent();
 
         logger.info(UBERALLS_TAG, "line coverage: " + lineCoveragePercent);
         logger.info(UBERALLS_TAG, "found parent coverage as " + parentCoverage.getLineCoveragePercent());
 
-        float coverageDelta = lineCoveragePercent - parentCoverage.getLineCoveragePercent();
+        float lineCoverageDelta = lineCoveragePercent - parentCoverage.getLineCoveragePercent();
+        float conditionCoverageDelta = conditionCoveragePercent - parentCoverage.getConditionalCoveragePercent();
 
-        String coverageDeltaDisplay = String.format("%.3f", coverageDelta);
+        String lineCoverageDeltaDisplay = String.format("%.3f", lineCoverageDelta);
         String lineCoverageDisplay = String.format("%.3f", lineCoveragePercent);
+        String conditionCoverageDeltaDisplay = String.format("%.3f", conditionCoverageDelta);
+        String conditionCoverageDisplay = String.format("%.3f", conditionCoveragePercent);
 
-        if (coverageDelta > 0) {
-            comment.append("Coverage increased (+" + coverageDeltaDisplay + "%) to " + lineCoverageDisplay + "%");
-        } else if (coverageDelta < 0) {
-            comment.append("Coverage decreased (" + coverageDeltaDisplay + "%) to " + lineCoverageDisplay + "%");
+        if (lineCoverageDelta == 0 && conditionCoverageDelta == 0) {
+            comment.append("Coverage remained the same (lines: " + lineCoverageDisplay
+                + "%, conditions: " + conditionCoverageDisplay  + "%)");
         } else {
-            comment.append("Coverage remained the same (" + lineCoverageDisplay + "%)");
+            comment.append("Coverage changed (lines: " + lineCoverageDeltaDisplay
+                + "%, conditions: " + conditionCoverageDeltaDisplay  + " %) to " + lineCoverageDisplay
+                + "% by lines and " + conditionCoverageDisplay + "% by conditions");
         }
 
         comment.append(" when pulling **" + branchName + "** into ");
-        comment.append(baseCommit.substring(0, 7));
+        comment.append(baseCommit);
         comment.append(". See " + buildURL + "cobertura for the coverage report");
     }
 
