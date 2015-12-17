@@ -90,7 +90,7 @@ class CommentBuilder {
                 + "%, conditions: " + conditionCoverageDisplay  + "%)");
         } else {
             comment.append("Coverage changed (lines: " + lineCoverageDeltaDisplay
-                + "%, conditions: " + conditionCoverageDeltaDisplay  + " %) to " + lineCoverageDisplay
+                + "%, conditions: " + conditionCoverageDeltaDisplay  + "%) to " + lineCoverageDisplay
                 + "% by lines and " + conditionCoverageDisplay + "% by conditions");
         }
 
