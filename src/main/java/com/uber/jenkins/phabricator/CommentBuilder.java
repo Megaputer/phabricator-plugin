@@ -96,7 +96,7 @@ class CommentBuilder {
 
         comment.append(" when pulling **" + branchName + "** into ");
         comment.append(baseCommit);
-        comment.append(". See " + buildURL + "cobertura for the coverage report");
+        comment.append(". See " + buildURL + "cobertura for the coverage report.");
     }
 
     public void processBuildResult(boolean commentOnSuccess, boolean commentWithConsoleLinkOnFailure, boolean runHarbormaster) {
@@ -105,16 +105,23 @@ class CommentBuilder {
                 comment.append("Build is green");
             }
         } else if (result == Result.UNSTABLE) {
-            comment.append("Build is unstable");
+            appendNewParagraph("Build is **unstable**");
         } else if (result == Result.FAILURE) {
             if (!runHarbormaster || commentWithConsoleLinkOnFailure) {
-                comment.append("Build has FAILED");
+                appendNewParagraph("Build has **FAILED**");
             }
         } else if (result == Result.ABORTED) {
-            comment.append("Build was aborted");
+            appendNewParagraph("Build was aborted");
         } else {
             logger.info(UBERALLS_TAG, "Unknown build status " + result.toString());
         }
+    }
+
+    private void appendNewParagraph(String message) {
+        if (hasComment()) {
+            comment.append("\n\n");
+        }
+        comment.append(message);
     }
 
     /**
